@@ -1,0 +1,132 @@
+/**
+ * Card.java  
+ *
+ * @author: Ian Butler
+ * 
+ * Brief Program Description:
+ * The card class of the blackjack game, initializes all the cards.
+ *
+ */
+public class Card
+{
+    private String rank;
+    private int value;
+    private String suit;
+
+    /**
+     * Constructor for the card class and initializes all the cards and their ranks.
+     * 
+     * @param String r the rank and int v the value
+     */
+    public Card(String r, String s)
+    {
+        rank = r;
+        suit = s;
+        if(r.equals("Two"))
+        {
+            value = 2;
+        }
+        else if(r.equals("Three"))
+        {
+            value = 3;
+        }
+        else if(r.equals("Four"))
+        {
+            value = 4;
+        }
+        else if(r.equals("Five"))
+        {
+            value = 5;
+        }
+        else if(r.equals("Six"))
+        {
+            value = 6;
+        }
+        else if(r.equals("Seven"))
+        {
+            value = 7;
+        }
+        else if(r.equals("Eight"))
+        {
+            value = 8;
+        }
+        else if(r.equals("Nine"))
+        {
+            value = 9;
+        }
+        else if(r.equals("Ten"))
+        {
+            value = 10;
+        }
+        else if(r.equals("Jack"))
+        {
+            value = 10;
+        }
+        else if(r.equals("Queen"))
+        {
+            value = 10;
+        }
+        else if(r.equals("King"))
+        {
+            value = 10;
+        }
+        else if(r.equals("Ace"))
+        {
+            value = 11;
+        }
+    }
+
+    /**
+     * Changes the value of the ace to 1 if the user's hand value is over 21.
+     */
+    public void changeAce()
+    {
+        if(rank.equals("Ace"))
+        {
+            value = 1;
+        }
+    }
+
+    /**
+     * Gets the rank of the card.
+     * 
+     * @return the card's rank.
+     */
+    public String getRank()
+    {
+        return rank;
+    }
+
+    /**
+     * Gets the value of the card.
+     * 
+     * @return the card's value.
+     */
+    public int getValue()
+    {
+        return value;
+    }
+
+    /**
+     * Gets the suit of the card
+     * 
+     * @return the card's suit.
+     */
+    public String getSuit()
+    {
+        return suit;
+    }
+
+    /**
+     * Prints the card rank, value, and suit.
+     * 
+     * @return String str
+     */
+    public String toString()
+    {
+        String str = "\nCard rank: " + getRank() + 
+            "\nCard value: " + getValue() +
+            "\nCard suit: " + getSuit();
+        return str;
+    }
+}
