@@ -1,0 +1,147 @@
+import java.util.ArrayList;
+/**
+ * Hand.java  
+ *
+ * @author: Ian Butler
+ * 
+ * Brief Program Description:
+ * A hand class for the blackjack program. Checks to see if the user won, lost, has 5 card charlie, or has blackjack. Also draws a card from the deck.
+ */
+public class Hand
+{
+    ArrayList<Card> hand;
+    /**
+     * Constructs a hand that starts with 0 cards in it.
+     */
+    public Hand()
+    {
+        hand = new ArrayList<Card>();
+    }
+
+    /**
+     * Calculates the value of the users hand
+     * 
+     * @return the user's hand value
+     */
+    public int getHandValue()
+    {
+        int value = 0;
+        for(int i = 0; i < hand.size(); i++)
+        {
+            value = value + hand.get(i).getValue();
+        }
+        return value;
+    }
+
+    public void clear()
+    {
+        for(int i = hand.size() -1; i>= 0; i--)
+        {
+            hand.remove(i);
+        }
+    }
+
+    /**
+     * Checks to see if the user's hand value is over 21
+     * 
+     * @return true if the user's hand is over 21 or false if the user won.
+     */
+    public boolean userBust()
+    {
+        if(getHandValue() > 21)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Checks to see if the user has blackjack
+     * 
+     * @return true if the user has blackhack or false if they do not
+     */
+    public boolean blackJack()
+    {
+        if(getHandValue() == 21)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Check to see if the user has 5 card charlie
+     * 
+     * @return true if the user has 5 card charlie or false if they do not
+     */
+    public boolean fiveCardCharlie()
+    {
+        if(hand.size() == 5)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Adds a card from the deck to the hand
+     */
+    public void addCard(Card c)
+    {
+        hand.add(c);
+        if(getHandValue() > 21)
+        {
+            for(int i = 0; i < hand.size(); i++)
+            {
+                if(hand.get(i).getRank().equals("Ace") && getHandValue() > 21)
+                {
+                    hand.get(i).changeAce();
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Gets the cards in the hand
+     * 
+     * @return the cards in the hand
+     */
+    public String getHand()
+    {
+        String returnMe= "";
+        for(Card c : hand)
+        {
+            returnMe += c + "\n";
+        }
+        return returnMe;
+    }
+
+
+    /**
+     * toString method to print
+     * 
+     * @return String str
+     */
+    public String toString()
+    {
+        String str = "";
+        for(Card c : hand)
+        {
+            str += c + "\n";
+        }
+        ;
+
+        return str;
+    }
+
+}
