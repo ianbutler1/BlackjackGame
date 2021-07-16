@@ -1,0 +1,115 @@
+import java.util.ArrayList;
+import java.util.Random;
+/**
+ * Shoe.java  
+ *
+ * @author: Ian Butler * 
+ * Brief Program Description:
+ * Shoe class for the blackjack program
+ * Allows the user the add multiple decks to the game, remove a card, and shuffle.
+ *
+ */
+public class Shoe
+{
+    private ArrayList<Card> shoe;
+    /**
+     * Conctructor for the shoe class also allows the user to specify the number of decks they want in the shoe.
+     * 
+     * @param int num the number of decks
+     */
+    public Shoe(int num)
+    {
+        shoe = new ArrayList<Card>();
+
+        String[] rank = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", };
+        String[] suit = {"Diamonds", "Spades", "Clubs","Hearts", };
+        int counter = 0;
+        for(int i = 0; i < num; i++)
+        {
+            for(int s = 0; s < suit.length; s++)
+            {
+                for(int r = rank.length-1; r >= 0; r--)
+                {
+                    if(counter < 26)
+                    {
+                        shoe.add(new Card(rank[r], suit[s]));
+                    }
+                    else
+                    {
+                        shoe.add(0, new Card(rank[r], suit[s]));
+                    }
+                    counter++;
+                }
+            }
+        }
+    }
+
+    
+    /**
+     * Gets the shoe
+     * 
+     * @return the shie
+     */
+    public ArrayList getShoe()
+    {
+        return shoe;
+    }
+    
+    /**
+     * Gets the number of cards inside the shoe
+     * 
+     * @return the number of cards in the shoe
+     */
+    public int shoeSize()
+    {
+        return shoe.size();
+    }
+
+    /**
+     * Gets the number of decks inside the shoe
+     * 
+     * @return the number of decks inside the shoe
+     */
+    public int numDecks()
+    {
+        return (shoe.size() + 1) /52;
+    }
+
+    /**
+     * Removes the top card from the shoe
+     */
+    public Card removeCard()
+    {
+        return shoe.remove(0);
+    }
+    
+    /**
+     * Shuffles all the decks in the shoe
+     * 
+     * @return the shuffled decks
+     */
+    public ArrayList<Card> shuffle()
+    {   
+        ArrayList<Card> end = new ArrayList<Card>();
+        Random r = new Random();
+        for(int i = shoe.size(); i > 0; i--)
+        {
+            end.add(shoe.remove(r.nextInt(shoe.size())));
+        }
+        shoe = end;
+        return shoe;
+    }
+
+    /**
+     * toString that returns everything
+     * 
+     * @return string str
+     */
+    public String toString()
+    {
+        String str = "Number of cards: " + shoeSize() + 
+            "\nNumber of decks: " + numDecks();
+        return str;
+
+    }
+}
