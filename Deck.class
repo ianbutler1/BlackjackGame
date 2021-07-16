@@ -1,0 +1,90 @@
+import java.util.ArrayList;
+/**
+ * Deck.java  
+ *
+ * @author: Ian Butler * 
+ * Brief Program Description:
+ * Deck class for the blackjack program
+ *
+ */
+public class Deck
+{
+    private ArrayList<Card> deck;
+     /**
+     * Constructs a 52 card deck in order.
+     * 
+     */
+    public Deck()
+    {
+        deck = new ArrayList<Card>();
+        fillDeck();
+    }
+
+    /**
+     * Fills the deck with 52 in correct order.
+     */
+    public void fillDeck()
+    {
+        String[] rank = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", };
+        String[] suit = {"Diamonds", "Spades", "Clubs","Hearts", };
+        int counter = 0;
+        for(int s = 0; s < suit.length; s++)
+        {
+            for(int r = rank.length-1; r >= 0; r--)
+            {
+                if(counter < 26)
+                {
+                    deck.add(new Card(rank[r], suit[s]));
+                }
+                else
+                {
+                    deck.add(0, new Card(rank[r], suit[s]));
+                }
+                counter++;
+            }
+        }
+    }
+    
+    /**
+     * Returns all the cards in the deck
+     * 
+     * @return the cards in the deck
+     */
+    public ArrayList<Card> getDeck()
+    {
+        return deck;
+    }
+
+    /**
+     * Gets the total number of cards in the deck.
+     * 
+     * @return the total cards int the deck
+     */
+    public int deckAmount()
+    {
+        return deck.size();
+    }
+
+    /**
+     * Draws the top card from the deck
+     * 
+     * @return the card that was drawn
+     */
+    public Card drawCard()
+    {
+        Card first = deck.get(0);
+        deck.remove(first);
+        return first;
+    }
+
+    /**
+     * Prints the deck in a toString
+     * 
+     * @return String str
+     */
+    public String toString()
+    {
+        String str = "" + getDeck();
+        return str;
+    }
+}
