@@ -1,0 +1,349 @@
+import java.util.Scanner;
+/**
+ * ShoeTester.java 
+ *
+ * @author: Ian Butler * 
+ * Brief Program Description:
+ * Serves as a tester for the shoe class
+ *
+ */
+
+public class ShoeTester 
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("How many decks would you like to add to your shoe?");
+        int num = sc.nextInt();
+        Shoe s = new Shoe(num);
+        System.out.println(s.getShoe());
+        System.out.println("-----SHUFFLE--------------------");
+        s.shuffle();
+        System.out.println(s.getShoe());
+        s.removeCard();
+        System.out.println(s.getShoe());
+        System.out.println(s.toString());
+    }
+}
+/**
+ * How many decks would you like to add to your shoe?
+1
+[Card rank: Ace
+Card value: 11
+Card suit: Hearts, Card rank: Two
+Card value: 2
+Card suit: Hearts, Card rank: Three
+Card value: 3
+Card suit: Hearts, Card rank: Four
+Card value: 4
+Card suit: Hearts, Card rank: Five
+Card value: 5
+Card suit: Hearts, Card rank: Six
+Card value: 6
+Card suit: Hearts, Card rank: Seven
+Card value: 7
+Card suit: Hearts, Card rank: Eight
+Card value: 8
+Card suit: Hearts, Card rank: Nine
+Card value: 9
+Card suit: Hearts, Card rank: Ten
+Card value: 10
+Card suit: Hearts, Card rank: Jack
+Card value: 10
+Card suit: Hearts, Card rank: Queen
+Card value: 10
+Card suit: Hearts, Card rank: King
+Card value: 10
+Card suit: Hearts, Card rank: Ace
+Card value: 11
+Card suit: Clubs, Card rank: Two
+Card value: 2
+Card suit: Clubs, Card rank: Three
+Card value: 3
+Card suit: Clubs, Card rank: Four
+Card value: 4
+Card suit: Clubs, Card rank: Five
+Card value: 5
+Card suit: Clubs, Card rank: Six
+Card value: 6
+Card suit: Clubs, Card rank: Seven
+Card value: 7
+Card suit: Clubs, Card rank: Eight
+Card value: 8
+Card suit: Clubs, Card rank: Nine
+Card value: 9
+Card suit: Clubs, Card rank: Ten
+Card value: 10
+Card suit: Clubs, Card rank: Jack
+Card value: 10
+Card suit: Clubs, Card rank: Queen
+Card value: 10
+Card suit: Clubs, Card rank: King
+Card value: 10
+Card suit: Clubs, Card rank: King
+Card value: 10
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Diamonds, Card rank: Jack
+Card value: 10
+Card suit: Diamonds, Card rank: Ten
+Card value: 10
+Card suit: Diamonds, Card rank: Nine
+Card value: 9
+Card suit: Diamonds, Card rank: Eight
+Card value: 8
+Card suit: Diamonds, Card rank: Seven
+Card value: 7
+Card suit: Diamonds, Card rank: Six
+Card value: 6
+Card suit: Diamonds, Card rank: Five
+Card value: 5
+Card suit: Diamonds, Card rank: Four
+Card value: 4
+Card suit: Diamonds, Card rank: Three
+Card value: 3
+Card suit: Diamonds, Card rank: Two
+Card value: 2
+Card suit: Diamonds, Card rank: Ace
+Card value: 11
+Card suit: Diamonds, Card rank: King
+Card value: 10
+Card suit: Spades, Card rank: Queen
+Card value: 10
+Card suit: Spades, Card rank: Jack
+Card value: 10
+Card suit: Spades, Card rank: Ten
+Card value: 10
+Card suit: Spades, Card rank: Nine
+Card value: 9
+Card suit: Spades, Card rank: Eight
+Card value: 8
+Card suit: Spades, Card rank: Seven
+Card value: 7
+Card suit: Spades, Card rank: Six
+Card value: 6
+Card suit: Spades, Card rank: Five
+Card value: 5
+Card suit: Spades, Card rank: Four
+Card value: 4
+Card suit: Spades, Card rank: Three
+Card value: 3
+Card suit: Spades, Card rank: Two
+Card value: 2
+Card suit: Spades, Card rank: Ace
+Card value: 11
+Card suit: Spades]
+-----SHUFFLE--------------------                   <----------------------shuffle
+[Card rank: Three
+Card value: 3
+Card suit: Diamonds, Card rank: Seven
+Card value: 7
+Card suit: Diamonds, Card rank: Nine
+Card value: 9
+Card suit: Clubs, Card rank: Three
+Card value: 3
+Card suit: Spades, Card rank: Four
+Card value: 4
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Spades, Card rank: Two
+Card value: 2
+Card suit: Spades, Card rank: King
+Card value: 10
+Card suit: Clubs, Card rank: Seven
+Card value: 7
+Card suit: Clubs, Card rank: Ten
+Card value: 10
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Hearts, Card rank: Two
+Card value: 2
+Card suit: Diamonds, Card rank: Five
+Card value: 5
+Card suit: Diamonds, Card rank: Five
+Card value: 5
+Card suit: Clubs, Card rank: Seven
+Card value: 7
+Card suit: Spades, Card rank: Jack
+Card value: 10
+Card suit: Diamonds, Card rank: Jack
+Card value: 10
+Card suit: Hearts, Card rank: Jack
+Card value: 10
+Card suit: Spades, Card rank: Ace
+Card value: 11
+Card suit: Hearts, Card rank: Four
+Card value: 4
+Card suit: Clubs, Card rank: Ten
+Card value: 10
+Card suit: Spades, Card rank: Three
+Card value: 3
+Card suit: Clubs, Card rank: Nine
+Card value: 9
+Card suit: Diamonds, Card rank: King
+Card value: 10
+Card suit: Hearts, Card rank: Six
+Card value: 6
+Card suit: Clubs, Card rank: Four
+Card value: 4
+Card suit: Spades, Card rank: Two
+Card value: 2
+Card suit: Hearts, Card rank: Four
+Card value: 4
+Card suit: Hearts, Card rank: Three
+Card value: 3
+Card suit: Hearts, Card rank: Ace
+Card value: 11
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Diamonds, Card rank: Six
+Card value: 6
+Card suit: Hearts, Card rank: Eight
+Card value: 8
+Card suit: Diamonds, Card rank: Nine
+Card value: 9
+Card suit: Spades, Card rank: Ace
+Card value: 11
+Card suit: Clubs, Card rank: Jack
+Card value: 10
+Card suit: Clubs, Card rank: Nine
+Card value: 9
+Card suit: Hearts, Card rank: Ten
+Card value: 10
+Card suit: Clubs, Card rank: Two
+Card value: 2
+Card suit: Clubs, Card rank: Five
+Card value: 5
+Card suit: Spades, Card rank: King
+Card value: 10
+Card suit: Spades, Card rank: Eight
+Card value: 8
+Card suit: Spades, Card rank: King
+Card value: 10
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Clubs, Card rank: Seven
+Card value: 7
+Card suit: Hearts, Card rank: Five
+Card value: 5
+Card suit: Hearts, Card rank: Eight
+Card value: 8
+Card suit: Clubs, Card rank: Eight
+Card value: 8
+Card suit: Hearts, Card rank: Six
+Card value: 6
+Card suit: Diamonds, Card rank: Six
+Card value: 6
+Card suit: Spades, Card rank: Ten
+Card value: 10
+Card suit: Hearts, Card rank: Ace
+Card value: 11
+Card suit: Spades]
+                                          <--------------- removed top card
+[Card rank: Seven
+Card value: 7
+Card suit: Diamonds, Card rank: Nine
+Card value: 9
+Card suit: Clubs, Card rank: Three
+Card value: 3
+Card suit: Spades, Card rank: Four
+Card value: 4
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Spades, Card rank: Two
+Card value: 2
+Card suit: Spades, Card rank: King
+Card value: 10
+Card suit: Clubs, Card rank: Seven
+Card value: 7
+Card suit: Clubs, Card rank: Ten
+Card value: 10
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Hearts, Card rank: Two
+Card value: 2
+Card suit: Diamonds, Card rank: Five
+Card value: 5
+Card suit: Diamonds, Card rank: Five
+Card value: 5
+Card suit: Clubs, Card rank: Seven
+Card value: 7
+Card suit: Spades, Card rank: Jack
+Card value: 10
+Card suit: Diamonds, Card rank: Jack
+Card value: 10
+Card suit: Hearts, Card rank: Jack
+Card value: 10
+Card suit: Spades, Card rank: Ace
+Card value: 11
+Card suit: Hearts, Card rank: Four
+Card value: 4
+Card suit: Clubs, Card rank: Ten
+Card value: 10
+Card suit: Spades, Card rank: Three
+Card value: 3
+Card suit: Clubs, Card rank: Nine
+Card value: 9
+Card suit: Diamonds, Card rank: King
+Card value: 10
+Card suit: Hearts, Card rank: Six
+Card value: 6
+Card suit: Clubs, Card rank: Four
+Card value: 4
+Card suit: Spades, Card rank: Two
+Card value: 2
+Card suit: Hearts, Card rank: Four
+Card value: 4
+Card suit: Hearts, Card rank: Three
+Card value: 3
+Card suit: Hearts, Card rank: Ace
+Card value: 11
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Diamonds, Card rank: Six
+Card value: 6
+Card suit: Hearts, Card rank: Eight
+Card value: 8
+Card suit: Diamonds, Card rank: Nine
+Card value: 9
+Card suit: Spades, Card rank: Ace
+Card value: 11
+Card suit: Clubs, Card rank: Jack
+Card value: 10
+Card suit: Clubs, Card rank: Nine
+Card value: 9
+Card suit: Hearts, Card rank: Ten
+Card value: 10
+Card suit: Clubs, Card rank: Two
+Card value: 2
+Card suit: Clubs, Card rank: Five
+Card value: 5
+Card suit: Spades, Card rank: King
+Card value: 10
+Card suit: Spades, Card rank: Eight
+Card value: 8
+Card suit: Spades, Card rank: King
+Card value: 10
+Card suit: Diamonds, Card rank: Queen
+Card value: 10
+Card suit: Clubs, Card rank: Seven
+Card value: 7
+Card suit: Hearts, Card rank: Five
+Card value: 5
+Card suit: Hearts, Card rank: Eight
+Card value: 8
+Card suit: Clubs, Card rank: Eight
+Card value: 8
+Card suit: Hearts, Card rank: Six
+Card value: 6
+Card suit: Diamonds, Card rank: Six
+Card value: 6
+Card suit: Spades, Card rank: Ten
+Card value: 10
+Card suit: Hearts, Card rank: Ace
+Card value: 11
+Card suit: Spades]
+Number of cards: 51
+Number of decks: 1
+
+ */
