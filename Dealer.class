@@ -1,0 +1,271 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+/**
+ * Write a description of class Dealer here.
+ * 
+ * @author Ian Butler 
+ * @version (a version number or a date)
+ */
+public class Dealer
+{
+    private Player player;
+    private Hand hand;
+    private Shoe shoe;
+    private int bet;
+
+    /**
+     * Constructs the dealer with access to the player, 5 decks in the shoe, and shuffles it.
+     * 
+     * @param p the player
+     */
+    public Dealer(Player p)
+    {
+        hand = new Hand();
+        player = p;
+        shoe = new Shoe(5);
+        shoe.shuffle();
+    }
+
+    /**
+     * Allows access to the Player class
+     * 
+     * @return player
+     */
+    public Player getPlayer()
+    {
+        return player;
+    }
+
+    /**
+     * Clears the dealer's hand after a round
+     */
+    public void dealerClear()
+    {
+        getDealerHand().clear();
+    }
+
+    /**
+     * @return the amount bet
+     */
+    public int getBet(int b)
+    {
+        return b;
+    }
+
+    /**
+     * Allows access to the dealer hand
+     * 
+     * @return the dealer hand
+     */
+    public Hand getDealerHand()
+    {
+        return hand;
+    }
+
+    /**
+     * Allows access to the shoe
+     * 
+     * @return the shoe
+     */
+    public Shoe getShoe()
+    {
+        return shoe;
+    }
+
+    /**
+     * Adds a card to the dealer's hand.
+     */
+    public void dealerHit()
+    {
+        hand.addCard(shoe.removeCard());
+    }
+
+    /**
+     * Adds a card to the player's hand if they decide to hit.
+     */
+    public void playerHit()
+    {
+        player.getHand().addCard(shoe.removeCard());
+        System.out.println(getPlayer().getHand().getHandValue());
+        System.out.println(getPlayer().getHand());
+        System.out.println("\n" + getPlayer() + "\nBet: " + getBet(bet));
+        System.out.println("Dealer's Hand: " + getDealerHand().getHand());
+    }
+
+    /**
+     * Gives the player insurance by subtracting the bet /2 and sets players insured value to true
+     */
+    public void giveInsurance(int bet)
+    {
+        int amount = bet / 2;
+        player.betAmount(amount);
+
+    }
+
+    /**
+     * Deals a new round
+     */
+    public void dealRound()
+    {
+        player.getHand().addCard(shoe.removeCard());
+        player.getHand().addCard(shoe.removeCard());
+        getDealerHand().addCard(shoe.removeCard());
+    }
+
+    /**
+     * Method that decides when the dealer should hit, if he should hit, and how many times.
+     */
+    public void printDealerHit()
+    {
+        if (bet != 0)
+        {
+            while (getDealerHand().getHandValue() <= 16)
+            {
+                getDealerHand().userBust();
+                if (getShoe().getShoe().size() > 0)
+                {
+                    dealerHit();
+                }
+                else
+                {
+                    getShoe().shuffle();
+                    dealerHit();
+                }
+            }
+
+            if ((getDealerHand().userBust()))
+            {
+                dealerBust(bet);
+            }
+            else
+            {
+                if (getDealerHand().getHandValue() == getPlayer().getHand().getHandValue() && !(getDealerHand().fiveCardCharlie()))
+                {
+                    printPush(bet);
+                }
+                else if (getDealerHand().getHandValue() < getPlayer().getHand().getHandValue() && !getPlayer().getHand().blackJack())
+                {
+                    betterHand(bet);
+                }
+                else if (getPlayer().getHand().getHandValue() < getDealerHand().getHandValue())
+                {
+                    worseHand(bet);
+
+                }
+            }
+        }
+    }
+
+    /**
+     * Prints if the user has 5 card charlie
+     */
+    public void fiveCardCharlie(int bet)
+    {
+        System.out.println("\nYou have Five Card Charlie. **YOU WIN**");
+        getPlayer().addMoney(bet*2);
+        System.out.println("Your new balance is $" + getPlayer().bankAmount());
+
+    }
+
+    /**
+     * Prints if the DEALER busts.
+     */
+    public void dealerBust(int bet)
+    {
+        System.out.println("\nThe dealer busted. **YOU WIN**");
+        getPlayer().addMoney(bet*2);
+        System.out.println("Your new balance is $" + getPlayer().bankAmount());
+
+    }
+
+    /**
+     * Prints if the player and dealer tie.
+     */
+    public void printPush(int bet)
+    {
+        System.out.println("\nYou push. **PUSH**");
+        getPlayer().addMoney(bet *2);
+        System.out.println("Your balance remains at $" + getPlayer().bankAmount());
+
+    }
+
+    /**
+     * Prints if the user busts.
+     */
+    public void printBust(int bet)
+    {
+        System.out.println("\n" + getPlayer() + "\nBet: " + getBet(bet));
+        System.out.println("Dealer's Hand: " + getDealerHand().getHand());
+        System.out.println("\nYou have busted. **YOU LOSE**");
+        getPlayer().removeMoney(bet*2);
+        System.out.println("Your new balance is $" + getPlayer().bankAmount());
+    }
+
+    /**
+     * Prints the hands at the beginning of the round of the dealer and the player.
+     */
+    public void printHands()
+    {
+        System.out.println(getPlayer().getHand());
+        System.out.println(getPlayer().getHand().getHandValue());
+        System.out.println("Dealer's Hand:");
+        System.out.println(getDealerHand().getHand());
+    }
+
+    /**
+     * Prints if the user has a better hand.
+     */
+    public void betterHand(int bet)
+    {
+        System.out.println("\nYou have a better hand then the dealer. **YOU WIN**");
+        getPlayer().addMoney(bet*2);
+        System.out.println("Your new balance is $" + getPlayer().bankAmount());
+
+    }
+
+
+    /**
+     * Prints if the player has a worse hand than the dealer
+     */
+    public void worseHand(int bet)
+    {
+        System.out.println("\nYou have a worse hand than the dealer.");
+        getPlayer().removeMoney(bet);
+        System.out.println("Your new balance is $" + getPlayer().bankAmount());
+    }
+
+    public void checkDealerBlackjack(int bet)
+    {
+        Scanner sc = new Scanner(System.in);
+        if (getDealerHand().blackJack() && (!getPlayer().getHand().blackJack()))
+        {
+            System.out.println("\n\nDealer has blackjack. **YOU LOSE**");
+            getPlayer().removeMoney(bet);
+            System.out.println("Your new balance is $" + getPlayer().bankAmount());
+
+        }
+        else if (!(getDealerHand().blackJack() || getPlayer().getHand().blackJack()))
+        {
+            boolean doubleDown = false;
+            //Asking if you want to Double Down
+            System.out.println("\nWould you like to double down? (Yes/No)");
+            String dd = sc.next();
+            if (dd.equalsIgnoreCase("Yes"))
+            {
+                doubleDown = true;
+                getPlayer().removeMoney(bet);
+                bet = bet * 2;
+                System.out.println("\nBet is now $" + bet);
+            }
+        }
+    }
+
+    /**
+     * toString
+     */
+    public String toString()
+    {
+        String str = "" + "Dealer's hand is: " + getDealerHand()+ "\n";
+        return str;
+    }
+}
