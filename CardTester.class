@@ -1,0 +1,59 @@
+
+/**
+ * CardTester.java 
+ *
+ * @author: Ian Butler
+ * 
+ * Brief Program Description:
+ * 
+ *
+ */
+
+public class CardTester 
+{
+    public static void main(String[] args)
+    {
+        Card c = new Card("Two", "Hearts");
+        System.out.println(c.toString());
+
+        Card c2 = new Card("Ace", "Diamonds");
+        System.out.println(c2.toString());
+
+        Card c3 = new Card("King", "Hearts");
+        System.out.println(c3.toString());
+
+        Card c4 = new Card("Jack", "Hearts");
+        System.out.println(c4.toString());
+        
+        Card c5 = new Card("Ace", "Diamonds");
+        System.out.println(c5.toString());
+        c5.changeAce();
+        System.out.println(c5.toString());
+    }
+}
+/**
+ * Card rank: Two
+ * Card value: 2
+ * Card suit: Hearts
+ * 
+ * Card rank: Ace
+ * Card value: 11
+ * Card suit: Diamonds
+ * 
+ * Card rank: King
+ * Card value: 10
+ * Card suit: Hearts
+ * 
+ * Card rank: Jack
+ * Card value: 10
+ * Card suit: Hearts
+ * 
+ * Card rank: Ace
+ * Card value: 11
+ * Card suit: Diamonds
+ * 
+ * Card rank: Ace
+ * Card value: 1
+ * Card suit: Diamonds
+
+ */
