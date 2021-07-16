@@ -1,0 +1,69 @@
+
+/**
+ * HandTester.java 
+ *
+ * @author: Ian Butler * 
+ * Brief Program Description:
+ * Serves as a tester for the hand class
+ *
+ */
+
+public class HandTester 
+{
+    public static void main(String[] args)
+    {
+        Hand h = new Hand();
+
+        h.addCard(new Card("Ace","Hearts"));
+        h.addCard(new Card("Two","Hearts"));
+        h.addCard(new Card("Ace", "Hearts"));
+        //VALUE: 14         BLACKJACK: FALSE        BUST: FALSE         FIVE CARD CHARLIE: FALSE
+        System.out.println(h.toString());
+        System.out.println("-----------------------");
+
+        Hand h2 = new Hand();
+        h2.addCard(new Card("Ace","Hearts"));
+        h2.addCard(new Card("Two","Hearts"));
+        h2.addCard(new Card("Ace", "Hearts"));
+        h2.addCard(new Card("King", "Hearts"));
+        //VALUE: 14         BLACKJACK: FALSE        BUST: FALSE         FIVE CARD CHARLIE: FALSE
+        System.out.println(h2.toString());
+        System.out.println("-----------------------");
+
+        Hand h3 = new Hand();
+        h3.addCard(new Card("Ace","Hearts"));
+        h3.addCard(new Card("Two","Hearts"));
+        h3.addCard(new Card("Ace", "Hearts"));
+        h3.addCard(new Card("Ace", "Hearts"));
+        h3.addCard(new Card("Eight", "Hearts"));
+        //VALUE: 13         BLACKJACK: FALSE        BUST: FALSE         FIVE CARD CHARLIE: TRUE
+        System.out.println(h3.toString());
+        System.out.println("-----------------------");
+
+        Hand h4 = new Hand();
+        h4.addCard(new Card("Ace","Hearts"));
+        h4.addCard(new Card("King","Hearts"));
+        System.out.println(h4.toString());  
+    }
+}
+/**
+ * Blackjack: false 
+ * Bust: false
+ * Five Card Charlie: false
+ * Hand Value: 14
+ * -----------------------
+ * Blackjack: false
+ * Bust: false
+ * Five Card Charlie: false
+ * Hand Value: 14
+ * -----------------------
+ * Blackjack: false
+ * Bust: false
+ * Five Card Charlie: true
+ * Hand Value: 13
+ * -----------------------
+ * Blackjack: true
+ * Bust: false
+ * Five Card Charlie: false
+ * Hand Value: 21
+ */
