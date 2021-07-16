@@ -1,0 +1,92 @@
+import java.util.ArrayList;
+/**
+ * Player.java  
+ *
+ * @author: Ian Butler
+ * 
+ * Brief Program Description:
+ * A player class for the blackjack game. Allows the player to have a bankroll, hand, etc.
+ *
+ */
+public class Player
+{
+    Hand hand;
+    private int bankroll;
+    private String name;
+    private boolean insurance;
+    private int bet;
+    /**
+     * Constructs the player with a name and a set amount of starting money.
+     * 
+     * @param n the player's name, m the bankroll
+     */
+    public Player(String n, int m)
+    {
+        hand = new Hand();
+        name = n;
+        bankroll = m;
+    }
+
+    public Hand getHand()
+    {
+        return hand;
+    }
+
+    /**
+     * Gets the player's name
+     * 
+     * @return Player's name
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Gets the player's current balance in their bankroll.
+     * 
+     * @return bankroll - the amount of money the player bas
+     */
+    public int bankAmount()
+    {
+        return bankroll;
+    }
+    
+    /**
+     * Adds money to the player's bankroll after they win a hand
+     */
+
+    public void addMoney(int b)
+    {
+        bankroll = bankroll + b;
+    }
+
+    /**
+     * Removes money from the player's bankroll after they lose a hand
+     */
+    public void removeMoney(int b)
+    {
+        bankroll = bankroll - b;
+    }
+    
+    /**
+     * Changes the player's bet amount. (Used for insurance)
+     */
+    public void betAmount(int b)
+    {
+        bet = b;
+    }
+    
+    /**
+     * toString
+     * 
+     * @return string str
+     */
+    public String toString()
+    {
+        String str = "";
+        return str;
+    }
+    
+}
+
