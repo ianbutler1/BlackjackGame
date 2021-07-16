@@ -1,0 +1,186 @@
+import java.util.Scanner;
+/**
+ * Runs the game
+ */
+
+public class Game 
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        boolean play = true;
+        boolean doubleDown = false;
+        boolean insurance = false;
+        System.out.println("Welcome to the casino");
+        System.out.println("What is your name?");
+        String n = sc.next();
+        System.out.println("\nHello " + n + ". How much money are you playing with?");
+        int m = sc.nextInt();   
+        //Playing the Game
+        while (play)
+        {
+            System.out.println("How much money would you like to bet");
+            int b = sc.nextInt();
+            Player p = new Player(n,m);
+            Dealer d = new Dealer(p);
+            d.getPlayer().getHand().clear();
+            d.dealerClear();
+            d.dealRound();
+            d.printHands();
+            if (d.getDealerHand().blackJack() && p.getHand().blackJack())
+            {
+                System.out.println("\n" + d);
+                System.out.println("\nBoth the dealer and player have blackjack.");
+                d.getPlayer().addMoney(b);
+                System.out.println(d.getPlayer().bankAmount());
+
+            }
+            else if (d.getPlayer().getHand().blackJack())
+            {
+                System.out.println("Dealer's Hand: ?, " + d.getDealerHand().getHand());
+                System.out.println("You have blackjack. **YOU WIN**");
+                d.getPlayer().addMoney((b*3)/2);
+                System.out.println("Your new balance is $" + d.getPlayer().bankAmount());
+
+            }
+            else if (d.getDealerHand().equals("Ace"))
+            {
+                System.out.println("\nDealer has an Ace. Would you like to buy insurance? (Yes/No)");
+                String i = sc.next();
+                if (i.equalsIgnoreCase("Yes"))
+                {
+                    d.giveInsurance(b);
+                    System.out.println("\n You bought insurance. Collect half your bet.");
+                    System.out.println("Your new balance is $" + d.getPlayer().bankAmount());
+
+                }
+                else
+                {
+                    System.out.println("You declined insurance.");
+                }
+            }
+            d.checkDealerBlackjack(b);
+            /**
+             * Runs a for loop and depending on what the user does, it performs that.
+             * 
+             * CREDIT: Alex Spungen 
+             */
+            for (int i = 0; i < 3; i++)
+            {
+                if (d.getDealerHand().blackJack() || d.getPlayer().getHand().blackJack())
+                {
+                    i = 3;
+                }
+                //Only hits once if you double downed
+                else if  (doubleDown)
+                {
+                    i = 2;
+                    if (d.getShoe().getShoe().size() > 0)
+                    {
+                        d.playerHit();
+                    }
+                    else
+                    {
+                        d.getShoe().shuffle();
+                        d.playerHit();
+                    }
+
+                    if (d.getPlayer().getHand().userBust())
+                    {
+                        d.printBust(b);
+                        i = 3;
+                    }
+                }
+                else
+                {
+                    System.out.println("\nWould you like to Hit? (Yes/No)");
+                    String nextMove = sc.next();
+                    if (nextMove.equalsIgnoreCase("Yes"))
+                    {
+                        if (d.getShoe().getShoe().size() > 0)
+                        {
+                            d.playerHit();
+                            i=1;
+                        }
+                        if (d.getPlayer().getHand().userBust())
+                        {
+                            d.printBust(b);
+                            i = 3;              
+                        }
+                        else if (d.getPlayer().getHand().fiveCardCharlie())
+                        {
+                            d.fiveCardCharlie(b);
+                        }
+                    }
+                    else if(nextMove.equalsIgnoreCase("No"))
+                    {
+                        i = 2;
+                    }
+                }
+            }
+            if (b != 0)
+            {
+                while (d.getDealerHand().getHandValue() <= 16)
+                {
+                    d.getDealerHand().userBust();
+                    if (d.getShoe().getShoe().size() > 0)
+                    {
+                        d.dealerHit();
+                    }
+                    else
+                    {
+                        d.getShoe().shuffle();
+                        d.dealerHit();
+                    }
+                }
+
+                if ((d.getDealerHand().userBust()))
+                {
+                    d.dealerBust(b);
+                }
+                else
+                {
+                    if (d.getDealerHand().getHandValue() == d.getPlayer().getHand().getHandValue() && !(d.getDealerHand().fiveCardCharlie()))
+                    {
+                        d.printPush(b);
+                    }
+                    else if (d.getDealerHand().getHandValue() < d.getPlayer().getHand().getHandValue() && !d.getPlayer().getHand().blackJack())
+                    {
+                        d.betterHand(b);
+                    }
+                    else if (d.getPlayer().getHand().getHandValue() < d.getDealerHand().getHandValue())
+                    {
+                        d.worseHand(b);
+
+                    }
+                }
+            }
+            if (d.getPlayer().bankAmount() > 0)
+            {
+                System.out.println("\nWould you like to play another hand? (true/false)");
+                play = sc.nextBoolean();
+                if (play == true)
+                {
+                    d.getShoe().shuffle();
+                    doubleDown = false;
+                }
+                else if (b <= d.getPlayer().bankAmount() )
+                {
+                    play = false;
+                    System.out.println("You have won $" + (d.getPlayer().bankAmount()));
+                }
+                else
+                {
+                    play = false;
+                    System.out.println("\nSorry " + n + ". You have lost $" + (d.getPlayer().bankAmount()));
+                }
+            }
+            else
+            {
+                play = false;
+                System.out.println("\nSorry " + n + " you have no money.");
+            }
+        }        
+    }
+
+}
